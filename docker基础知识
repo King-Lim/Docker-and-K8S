@@ -1,1 +1,29 @@
 链接文章：https://zhuanlan.zhihu.com/p/377912281
+
+
+1.知识点，容器、镜像、仓库
+  
+  
+  
+2.解决镜像下载慢的问题
+    配置镜像加速器，修改配置文件：/etc/docker/daemon.json
+    重启docker，使配置生效：systemctl restart docker
+
+3.镜像管理
+    要想创建容器，必须要有镜像
+    *镜像命名
+        服务器IP：端口/分类/镜像名:tag
+        如果未指明端口，默认80；tag默认latest
+        查看当前系统有多少镜像：docker images
+    *重新对本地镜像做标签
+        docker tag 原镜像名 新镜像名
+        【注：tag修改之后，原/新镜像均存在；建议tag设置为版本号、日期等有意义的字符】
+        查看镜像时，出现两个镜像名，一个image ID，实际上是同一个文件（类似于Linux硬链接）
+        删除其中一个不会删除硬盘上的文件，只有把image ID对应的所有名字均删除，文件才会从硬盘上删除；
+    *删除镜像
+        语法：docker rmi 镜像名:tag
+        当命令执行的输出为delete才是删除完成，如果为untag，则说明还存在未删完的image
+ 
+4.镜像的层结构
+    
+        
