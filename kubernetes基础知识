@@ -1,0 +1,14 @@
+1.kubernetes的升级步骤
+    K8S集群是通过kubeadm的方式安装，然后通过kubeadm初始化安装其他所有组件；
+    @节点的升级步骤：
+        先升级master；
+        再升级worker；
+        如果有多台master，需要一台台升级完毕后，再去升级worker；
+    @软件的升级步骤：
+        无论是master还是worker
+        先升级kubeadm；
+        再执行kubeadm upgrade；
+        再升级kubelet和kubectl；
+        
+2.        
+          
