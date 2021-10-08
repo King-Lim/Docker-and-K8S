@@ -10,5 +10,9 @@
         再执行kubeadm upgrade；
         再升级kubelet和kubectl；
         
-2.        
+2.概念：
+    控制管理器Deployment会创建出RS（ReplicaSet），由RS去创建相应的Pod；
+    滚动更新时，新建RS1之后，原RS会停用，并不会删除（用以回滚）；
+    HPA（Horizontal Pod Autoscaling）基于RS创建，根据CPU的利用率，对该RS下的Pod进行缩/扩容；
+
           
