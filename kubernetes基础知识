@@ -16,7 +16,7 @@
     HPA（Horizontal Pod Autoscaling）基于RS创建，根据CPU的利用率，对该RS下的Pod进行缩/扩容；
 
 3.kubernetes组件：
-    @Master节点关键组件：
+    @Master Node关键组件：
         *etcd：保存了整个集群的状态，就是一个数据库，只有API Server能与其通信；
         *API Server：提供了资源操作的唯一入口，并提供认证、授权、访问控制、API注册和发现机制；
         *controller manager：负责维护集群的状态，是集群内所有资源对象的自动化控制中心，负责Pod和Node的管理；
@@ -25,7 +25,7 @@
         *网络插件：如flannel等需要存储网络配置信息；
         【注：scheduler和controller-manager都是通过API Server从etcd中获取各种资源的状态，
         进行相应的调度和控制操作】
-    @Node节点关键组件：        
+    @Worker Node节点关键组件：        
         *kubelet：处理Master下发到本节点的任务，管理Pod及Pod的容器，每个kubelet在API Server上注册自身信息，定期向Master汇报节点资源的使用情况，并通过cAdvisor监控容器和节点信息；
             负责维护容器的生命周期，同时也负责Volume（CSI）和网络（CNI）的管理；
         *Container runtime：负责镜像管理以及Pod和容器的真正运行（CRI）；
