@@ -45,3 +45,26 @@
     *在所有节点上启动kubelet，并设置为开机自启动；
         #systemctl restart kubelet
         #systemctl enable kubelet
+
+4.安装master
+    *在master上面执行初始化；
+        #kubeadm init --image-repository registry.aliyuncs.com/google_containers --kebernetes-version=v1.21.1 --pod-network-cidr=10.244.0.0/16
+        ...输出...
+        @用--image-repository，选项指定使用阿里云的镜像；
+        @--pod-network-cidr=10.244.0.0/16，指的是pod的网段；
+        @如果想安装其他版本的话，直接在--kubernetes-version里指定；
+    *复制kubeconfig文件；
+        #mkdir -p $HOME/.kube
+        #sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+        #sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    *把worker加入kubernetes集群的命令；
+        #kubeadm token create --print-join-command
+        #运行上面输出的命令
+
+5.配置worker加入集群
+6.安装calico网络
+7.删除节点及重新加入
+8.设置metric-server监控pod及节点的负载
+9.命名空间（namespace）
+    进入命名空间，所包含的pod是分布在不同的worker上；
+    
