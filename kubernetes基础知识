@@ -23,14 +23,13 @@
             如：故障检测、自动扩展、滚动更新等；
         *scheduler：负责资源的调度，按照预定的调度策略将Pod调度到相应的机器上；
         *网络插件：如flannel等需要存储网络配置信息；
-        【注：scheduler和controller-manager都是通过API Server从etcd中获取各种资源的状态，
-        进行相应的调度和控制操作】
+        【注：scheduler和controller-manager都是通过API Server从etcd中获取各种资源的状态，进行相应的调度和控制操作】
     @Worker Node节点关键组件：        
         *kubelet：处理Master下发到本节点的任务，管理Pod及Pod的容器，每个kubelet在API Server上注册自身信息，定期向Master汇报节点资源的使用情况，并通过cAdvisor监控容器和节点信息；
             负责维护容器的生命周期，同时也负责Volume（CSI）和网络（CNI）的管理；
         *Container runtime：负责镜像管理以及Pod和容器的真正运行（CRI）；
         *kube-proxy：负责为Service提供cluster内部的服务发现和负载均衡；
-        *CNI网络组件：作为容器平台的网络标准化组件，为容器提供跨网段的通信支持，是kubernetes集群overlay网络的实现关键；
+        *CNI网络组件：作为容器平台的网络标准化组件，为容器提供跨网段的通信支持，是kubernetes集群overlay网络的实现关键；(calico网络：使节点中的pod能够互相通信)
         *Docker：kubernetes支持多种容器工具，目前Docker作为主流的容器，为K8S集群提供容器创建及管理；
     @集群各组件间的交互：
         *kubelet&API Server
@@ -38,3 +37,16 @@
         *Scheduler&API Server
     list-watch机制        
             
+----------------------------------------------------------------------------------------------------------------------------------    
+1.k8s架构：
+  master控制台，也叫做control plane node（控制平面节点）；
+  worker，专门用于运行pod；
+
+2.kubernetes的最小管理单位是pod；
+  pod由kubernetes创建；
+  master根据调度程序（scheduler）决定在哪台worker上创建pod；
+
+3.master上运行的组件及作用
+  kubectl：命令行工具，用以用户创建、删除、查看相关pod；
+  api-server：接收用户发送的请求的接口；
+  scheduler：调度器
