@@ -16,4 +16,32 @@
     *查看Kubernetes集群中所支持的api-version
         kubectl api-version
         
-3.
+3.k8s集群安装的环境准备
+    *建议所有节点使用同一操作系统，在所有节点上同步/etc/hosts;
+        master_ip        主机名        主机名缩写
+        node1_ip         主机名        主机名缩写
+        node2_ip         主机名        主机名缩写
+        ...
+    *在所有节点上配置防火墙和关闭selinux;
+        #firewall-cmd --get-default-zone
+        trusted
+        #getenforce
+        disabled
+    *在所有节点上关闭swap，并注释掉/etc/fstab里的swap相关条目;
+        #swapon -s
+        #swapoff -a
+        #sed -i '/swap/s/UUID/#UUID/g' /etc/fstab
+    *在所有节点配置好yum源（需要提前安装好wget，再执行下面的操作）
+        #rm -rf /etc/yum.repos.d/*
+        #wget -P /etc/yum.repos.d/ ftp://ftp.rhrc.cc/k8s/*
+    *在所有节点安装并启动docker，并设置docker自启动；
+        #yum install docker-ce -y
+        #systemctl enable docker --now
+    *在所有节点设置内核参数；
+        #cat <<EOF > /etc/sysctl.d/k8s.conf
+        让该设置生效
+        #sysctl -p /etc/sysctl.d/k8s.conf
+    *在所有节点安装软件包（kubeadm、kubelet、kubectl）；
+    *在所有节点上启动kubelet，并设置为开机自启动；
+        #systemctl restart kubelet
+        #systemctl enable kubelet
