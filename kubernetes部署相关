@@ -67,4 +67,34 @@
 8.设置metric-server监控pod及节点的负载
 9.命名空间（namespace）
     进入命名空间，所包含的pod是分布在不同的worker上；
-    
+    *查看当前有多少命名空间；
+        #kubectl get ns
+    *创建一个新的命名空间ns_name1;
+        #kubectl create ns ns_name1
+        #kubectl get ns
+    *删除一个命名空间ns_name1；
+        #kubectl delete ns ns_name1
+        
+10.pod
+    *查看有多少pod;
+        #kubectl get pods
+    *列出指定命名空间kube-system里的所有pod;
+        #kubectl get pods -n kube-system
+    *列出所有命名空间里的pod;
+        #kubectl get pods -A
+        #kubectl get pods --all-namespace
+    *创建pod
+        @通过命令行创建的pod为自助式pod，不受pod控制器的管理;
+            #kubectl run pod_name --image=image [--labels=tag=value] [--env="key=value"] [--port=port_number] [--image-pull-policy=镜像下载策略]
+        @生成yaml文件创建pod;
+            #kubectl run pod_name --image=image --dry-run=client -o yaml > pod.yaml                         #生成yaml文件
+                --dry-run=client：模拟创建pod，但是不会真的创建
+                -o yaml：以yaml文件格式输出，然后把结果重定向至pod.yaml文件
+            #kubectl apply -f pod.yaml                                                                      #通过pod.yaml文件创建pod
+        Tips：
+            *pod的yaml文件，一级参数有五个；
+                apiVersion：指定pod的apiVersion，是固定值v1
+                kind：指定当前要创建的类型是pod，与上面的apiVersion的值对应
+                metadata：指定pod的元数据信息，包括pod名、pod的标签、所在的命名空间等
+                spec：定义容器及各种策略
+                status：系统自动生成
