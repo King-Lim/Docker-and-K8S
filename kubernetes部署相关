@@ -121,3 +121,28 @@
             *spec.containers.env的四级参数有2个；
                 -name：变量名
                 value：变量值；如果值为数字，"数字"，需要带引号
+
+11.pod的基本操作
+    *在pod里面执行命令（即在容器中执行命令）；
+        #kubectl exec pod_name -- command
+        #kubectl exec pod1 -- ls /usr/share/nginx/html               #查看pod1中/usr/share/nginx/html的内容
+            tips: pod后面的 -- 是固定用法
+    *文件的拷贝；
+        #kubectl cp /etc/hosts pod1:/usr/share/nginx/html            #将物理机的文件/etc/hosts，拷贝到pod1里面
+        #kubectl cp pod1:/usr/share/nginx/html /tmp                  #将pod里的文件拷贝到物理机/tmp目录
+    *查看pod的属性；
+        #kubectl describe pod pod_name
+    *查看pod的日志；
+        #kubectl logs pod_name
+        #kubectl logs pod_name -c container_name                     #如果一个pod里有多个容器，需要使用-c指定容器的输出
+    *删除pod；
+        #kubectl delete pod pod_name
+        #kubectl delete -f pod.yaml
+            命令添加--force参数，可以强制删除pod，速度更快
+    *pod hook处理删除pod（pod正在运行程序、client访问连接等）时造成的异常
+        在整个pod生命期（lifecycle）内，涉及两个hook；
+        podStart：创建pod时，随着pod的主程序同时运行，没有先后顺序；
+        podStop：删除pod时，需要先运行podStop里的程序，之后再删除关闭pod；
+            tips：当执行删除pod的命令后，pod的状态会变为“terminating”；等待preStop里的进程执行完毕，再关闭主进程，删除pod；
+
+12.初始化pod
