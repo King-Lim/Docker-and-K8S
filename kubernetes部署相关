@@ -107,7 +107,7 @@
                 restartPolicy：定义pod的重启策略
                 dnsPolicy：定义DNS策略
             *spec.containers的三级参数有7个；
-                -image：定义容器所使用的镜像
+                - image：定义容器所使用的镜像
                 imagePullPolicy：镜像的下载策略
                 name：容器的名字
                 command：指定容器里运行的进程；不写则使用镜像的默认进程
@@ -115,11 +115,11 @@
                 env：定义变量
                 resources：定义资源限制
             *spec.containers.ports的四级参数有3个；
-                -name：端口的名字
+                - name：端口的名字
                 containerPort：容器所使用的端口；根据镜像的端口指定
                 protocol：设置端口协议（TCP/UDP）
             *spec.containers.env的四级参数有2个；
-                -name：变量名
+                - name：变量名
                 value：变量值；如果值为数字，"数字"，需要带引号
 
 11.pod的基本操作
