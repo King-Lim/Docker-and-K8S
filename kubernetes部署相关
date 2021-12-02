@@ -92,9 +92,32 @@
                 -o yaml：以yaml文件格式输出，然后把结果重定向至pod.yaml文件
             #kubectl apply -f pod.yaml                                                                      #通过pod.yaml文件创建pod
         Tips：
-            *pod的yaml文件，一级参数有五个；
+            *pod的yaml文件，一级参数有5个；
                 apiVersion：指定pod的apiVersion，是固定值v1
                 kind：指定当前要创建的类型是pod，与上面的apiVersion的值对应
                 metadata：指定pod的元数据信息，包括pod名、pod的标签、所在的命名空间等
                 spec：定义容器及各种策略
                 status：系统自动生成
+            *metadata的二级参数有3个；
+                name：定义pod的名字
+                namespace：定义pod所在的命名空间
+                labels：定义pod的标签；格式为key：value
+            *spec的二级参数有3个；
+                containers：定义容器
+                restartPolicy：定义pod的重启策略
+                dnsPolicy：定义DNS策略
+            *spec.containers的三级参数有7个；
+                -image：定义容器所使用的镜像
+                imagePullPolicy：镜像的下载策略
+                name：容器的名字
+                command：指定容器里运行的进程；不写则使用镜像的默认进程
+                ports：定义容器所使用的端口
+                env：定义变量
+                resources：定义资源限制
+            *spec.containers.ports的四级参数有3个；
+                -name：端口的名字
+                containerPort：容器所使用的端口；根据镜像的端口指定
+                protocol：设置端口协议（TCP/UDP）
+            *spec.containers.env的四级参数有2个；
+                -name：变量名
+                value：变量值；如果值为数字，"数字"，需要带引号
