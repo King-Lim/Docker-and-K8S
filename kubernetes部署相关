@@ -127,6 +127,7 @@
         #kubectl exec pod_name -- command
         #kubectl exec pod1 -- ls /usr/share/nginx/html               #查看pod1中/usr/share/nginx/html的内容
             tips: pod后面的 -- 是固定用法
+        #kubectl exec -n namespace_name pod_name /bin/bash           #进入pod
     *文件的拷贝；
         #kubectl cp /etc/hosts pod1:/usr/share/nginx/html            #将物理机的文件/etc/hosts，拷贝到pod1里面
         #kubectl cp pod1:/usr/share/nginx/html /tmp                  #将pod里的文件拷贝到物理机/tmp目录
