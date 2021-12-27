@@ -147,6 +147,21 @@
             tips：当执行删除pod的命令后，pod的状态会变为“terminating”；等待preStop里的进程执行完毕，再关闭主进程，删除pod；
 
 12.初始化pod
+    #实例
+    ...
+    spec:
+      containaers:
+      - image:nginx                                         #定义的为普通容器
+        name:c1
+        imagePullPolicy:IfNotPresent
+        resources:{}
+      initcontainers：
+      - image：docker.io/alpine:latest                      #定义的为初始化容器
+        name:xx
+        imagePullPolicy:IfNotPresent
+    ...
+    #初始化容器使用的镜像是alpine，运行起来会把内核参数vm.swappiness的值改为0；
+    
 13.pod的数据存储管理
     #在pod里写入数据仅仅是写入容器
     Q：<1>一个pod里存在多个容器，这些容器之间如何共享数据?
@@ -156,3 +171,4 @@
     *NFS存储
     *持久化存储
         
+14.
